@@ -130,10 +130,8 @@ S55 = FUNC_solverSPARSER1D_inertial(mean_xp0,mean_up0, ...
     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
 
 
-
-
+% Plots to compare without splitting --------------------------------------
 close all
-
 subplot(221)
 plot(M1.t,squeeze(M1.mean_xp(1,1,:))); hold on
 plot(P1.t,squeeze(P1.MoM.mean_xp(1,1,:)),'--'); hold on
@@ -141,7 +139,6 @@ plot(S11.t,S11.mean_xp,'-.')
 plot(M1.t,squeeze(M1.mean_up(1,1,:))); hold on
 plot(P1.t,squeeze(P1.MoM.mean_up(1,1,:)),'--'); hold on
 plot(S11.t,S11.mean_up,'-.')
-
 subplot(222)
 plot(M1.t,squeeze(M1.xpxp(1,1,:)).^0.5); hold on
 plot(P1.t,squeeze(P1.MoM.xpxp(1,1,:)).^0.5,'--'); hold on
@@ -149,7 +146,6 @@ plot(S11.t,S11.xpxp.^0.5,'-.')
 plot(M1.t,squeeze(M1.upup(1,1,:)).^0.5); hold on
 plot(P1.t,squeeze(P1.MoM.upup(1,1,:)).^0.5,'--'); hold on
 plot(S11.t,S11.upup.^0.5,'-.')
-
 subplot(223)
 plot(M5.t,squeeze(M5.mean_xp(1,1,:))); hold on
 plot(P5.t,squeeze(P5.MoM.mean_xp(1,1,:)),'--'); hold on
@@ -157,7 +153,6 @@ plot(S51.t,S51.mean_xp,'-.')
 plot(M5.t,squeeze(M5.mean_up(1,1,:))); hold on
 plot(P5.t,squeeze(P5.MoM.mean_up(1,1,:)),'--'); hold on
 plot(S51.t,S51.mean_up,'-.')
-
 subplot(224)
 plot(M5.t,squeeze(M5.xpxp(1,1,:)).^0.5); hold on
 plot(P5.t,squeeze(P5.MoM.xpxp(1,1,:)).^0.5,'--'); hold on
@@ -167,9 +162,72 @@ plot(P5.t,squeeze(P5.MoM.upup(1,1,:)).^0.5,'--'); hold on
 plot(S15.t,S51.upup.^0.5,'-.')
 
 
-% figure % close all
-% plot([1 2 3 4 5],[e_xp_S1 e_xp_S2 e_xp_S3 e_xp_S4 e_xp_S5],'o--'); hold on
-% plot([1 5],[e_xp_P1 e_xp_P1])
+% Plots to confirm the 3rd order convergence of SPARSE-R ------------------
+% Errors 
+e11_mean_xp = norm(S11.mean_xp-S15.mean_xp,2)/norm(S15.mean_xp,Inf);
+e11_mean_up = norm(S11.mean_up-S15.mean_up,2)/norm(S15.mean_up,Inf);
+e11_xpxp    = norm(S11.xpxp   -S15.xpxp,2   )/norm(S15.xpxp,Inf);
+e11_xpup    = norm(S11.xpup   -S15.xpup,2   )/norm(S15.xpup,Inf);
+e11_upup    = norm(S11.upup   -S15.upup,2   )/norm(S15.upup,Inf);
+e12_mean_xp = norm(S12.mean_xp-S15.mean_xp,2)/norm(S15.mean_xp,Inf);
+e12_mean_up = norm(S12.mean_up-S15.mean_up,2)/norm(S15.mean_up,Inf);
+e12_xpxp    = norm(S12.xpxp   -S15.xpxp,2   )/norm(S15.xpxp,Inf);
+e12_xpup    = norm(S12.xpup   -S15.xpup,2   )/norm(S15.xpup,Inf);
+e12_upup    = norm(S12.upup   -S15.upup,2   )/norm(S15.upup,Inf);
+e13_mean_xp = norm(S13.mean_xp-S15.mean_xp,2)/norm(S15.mean_xp,Inf);
+e13_mean_up = norm(S13.mean_up-S15.mean_up,2)/norm(S15.mean_up,Inf);
+e13_xpxp    = norm(S13.xpxp   -S15.xpxp,2   )/norm(S15.xpxp,Inf);
+e13_xpup    = norm(S13.xpup   -S15.xpup,2   )/norm(S15.xpup,Inf);
+e13_upup    = norm(S13.upup   -S15.upup,2   )/norm(S15.upup,Inf);
+e14_mean_xp = norm(S14.mean_xp-S15.mean_xp,2)/norm(S15.mean_xp,Inf);
+e14_mean_up = norm(S14.mean_up-S15.mean_up,2)/norm(S15.mean_up,Inf);
+e14_xpxp    = norm(S14.xpxp   -S15.xpxp,2   )/norm(S15.xpxp,Inf);
+e14_xpup    = norm(S14.xpup   -S15.xpup,2   )/norm(S15.xpup,Inf);
+e14_upup    = norm(S14.upup   -S15.upup,2   )/norm(S15.upup,Inf);
+
+e51_mean_xp = norm(S51.mean_xp-S55.mean_xp,2)/norm(S55.mean_xp,Inf);
+e51_mean_up = norm(S51.mean_up-S55.mean_up,2)/norm(S55.mean_up,Inf);
+e51_xpxp    = norm(S51.xpxp   -S55.xpxp,2   )/norm(S55.xpxp,Inf);
+e51_xpup    = norm(S51.xpup   -S55.xpup,2   )/norm(S55.xpup,Inf);
+e51_upup    = norm(S51.upup   -S55.upup,2   )/norm(S55.upup,Inf);
+e52_mean_xp = norm(S52.mean_xp-S55.mean_xp,2)/norm(S55.mean_xp,Inf);
+e52_mean_up = norm(S52.mean_up-S55.mean_up,2)/norm(S55.mean_up,Inf);
+e52_xpxp    = norm(S52.xpxp   -S55.xpxp,2   )/norm(S55.xpxp,Inf);
+e52_xpup    = norm(S52.xpup   -S55.xpup,2   )/norm(S55.xpup,Inf);
+e52_upup    = norm(S52.upup   -S55.upup,2   )/norm(S55.upup,Inf);
+e53_mean_xp = norm(S53.mean_xp-S55.mean_xp,2)/norm(S55.mean_xp,Inf);
+e53_mean_up = norm(S53.mean_up-S55.mean_up,2)/norm(S55.mean_up,Inf);
+e53_xpxp    = norm(S53.xpxp   -S55.xpxp,2   )/norm(S55.xpxp,Inf);
+e53_xpup    = norm(S53.xpup   -S55.xpup,2   )/norm(S55.xpup,Inf);
+e53_upup    = norm(S53.upup   -S55.upup,2   )/norm(S55.upup,Inf);
+e54_mean_xp = norm(S54.mean_xp-S55.mean_xp,2)/norm(S55.mean_xp,Inf);
+e54_mean_up = norm(S54.mean_up-S55.mean_up,2)/norm(S55.mean_up,Inf);
+e54_xpxp    = norm(S54.xpxp   -S55.xpxp,2   )/norm(S55.xpxp,Inf);
+e54_xpup    = norm(S54.xpup   -S55.xpup,2   )/norm(S55.xpup,Inf);
+e54_upup    = norm(S54.upup   -S55.upup,2   )/norm(S55.upup,Inf);
+
+figure
+subplot(121)
+loglog([1 2 3 4],[e11_mean_xp e12_mean_xp e13_mean_xp e14_mean_xp],'o-.'); hold on
+loglog([1 2 3 4],[e11_mean_up e12_mean_up e13_mean_up e14_mean_up],'o-.'); hold on
+loglog([1 2 3 4],[e11_xpxp    e12_xpxp    e13_xpxp    e14_xpxp],'o-.'); hold on
+loglog([1 2 3 4],[e11_xpup    e12_xpup    e13_xpup    e14_xpup],'o-.'); hold on
+loglog([1 2 3 4],[e11_upup    e12_upup    e13_upup    e14_upup],'o-.'); hold on
+xx = linspace(1,4,100);
+yy = 0.01*xx.^(-3);
+loglog(xx,yy,'--k')
+xlabel('Levels of splitting along \Xi')
+ylabel('Error')
+
+subplot(122)
+loglog([1 2 3 4],[e51_mean_xp e52_mean_xp e53_mean_xp e54_mean_xp],'o-.'); hold on
+loglog([1 2 3 4],[e51_mean_up e52_mean_up e53_mean_up e54_mean_up],'o-.'); hold on
+loglog([1 2 3 4],[e51_xpxp    e52_xpxp    e53_xpxp    e54_xpxp],'o-.'); hold on
+loglog([1 2 3 4],[e51_xpup    e52_xpup    e53_xpup    e54_xpup],'o-.'); hold on
+loglog([1 2 3 4],[e51_upup    e52_upup    e53_upup    e54_upup],'o-.'); hold on
+loglog(xx,yy,'--k')
+xlabel('Levels of splitting along \Xi')
+ylabel('Error')
 
 
 %% PLOTS ==================================================================
