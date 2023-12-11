@@ -101,7 +101,6 @@ end
 M5 = FUNC_solverMCPSIC2D_inertial(xp0,yp0,up0,vp0,[tLim(1) taup*tLim(2)],[taup*nt 2],flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
 
-
 %% MoP ====================================================================
 
 % -------------------------------------------------------------------------
@@ -181,14 +180,40 @@ close all
 i = 1;
 j = 1;
 
+e1_mean_xp  = abs(squeeze(P1.MoM.mean_xp(i,j,:))-squeeze(M1.mean_xp(i,j,:)))/norm(squeeze(M1.mean_xp(i,j,:)),Inf);
+e2_mean_xp  = abs(squeeze(P2.MoM.mean_xp(i,j,:))-squeeze(M2.mean_xp(i,j,:)))/norm(squeeze(M2.mean_xp(i,j,:)),Inf);
+e3_mean_xp  = abs(squeeze(P3.MoM.mean_xp(i,j,:))-squeeze(M3.mean_xp(i,j,:)))/norm(squeeze(M3.mean_xp(i,j,:)),Inf);
+e4_mean_xp  = abs(squeeze(P4.MoM.mean_xp(i,j,:))-squeeze(M4.mean_xp(i,j,:)))/norm(squeeze(M4.mean_xp(i,j,:)),Inf);
+e5_mean_xp  = abs(squeeze(P5.MoM.mean_xp(i,j,:))-squeeze(M5.mean_xp(i,j,:)))/norm(squeeze(M5.mean_xp(i,j,:)),Inf);
+e1_mean_up  = abs(squeeze(P1.MoM.mean_up(i,j,:))-squeeze(M1.mean_up(i,j,:)))/norm(squeeze(M1.mean_up(i,j,:)),Inf);
+e2_mean_up  = abs(squeeze(P2.MoM.mean_up(i,j,:))-squeeze(M2.mean_up(i,j,:)))/norm(squeeze(M2.mean_up(i,j,:)),Inf);
+e3_mean_up  = abs(squeeze(P3.MoM.mean_up(i,j,:))-squeeze(M3.mean_up(i,j,:)))/norm(squeeze(M3.mean_up(i,j,:)),Inf);
+e4_mean_up  = abs(squeeze(P4.MoM.mean_up(i,j,:))-squeeze(M4.mean_up(i,j,:)))/norm(squeeze(M4.mean_up(i,j,:)),Inf);
+e5_mean_up  = abs(squeeze(P5.MoM.mean_up(i,j,:))-squeeze(M5.mean_up(i,j,:)))/norm(squeeze(M5.mean_up(i,j,:)),Inf);
+e1_sigma_xp = abs(squeeze(P1.MoM.xpxp(i,j,:).^0.5)-squeeze(M1.xpxp(i,j,:).^0.5))/norm(squeeze(M1.xpxp(i,j,:).^0.5),Inf);
+e2_sigma_xp = abs(squeeze(P2.MoM.xpxp(i,j,:).^0.5)-squeeze(M2.xpxp(i,j,:).^0.5))/norm(squeeze(M2.xpxp(i,j,:).^0.5),Inf);
+e3_sigma_xp = abs(squeeze(P3.MoM.xpxp(i,j,:).^0.5)-squeeze(M3.xpxp(i,j,:).^0.5))/norm(squeeze(M3.xpxp(i,j,:).^0.5),Inf);
+e4_sigma_xp = abs(squeeze(P4.MoM.xpxp(i,j,:).^0.5)-squeeze(M4.xpxp(i,j,:).^0.5))/norm(squeeze(M4.xpxp(i,j,:).^0.5),Inf);
+e5_sigma_xp = abs(squeeze(P5.MoM.xpxp(i,j,:).^0.5)-squeeze(M5.xpxp(i,j,:).^0.5))/norm(squeeze(M5.xpxp(i,j,:).^0.5),Inf);
+e1_xpup     = abs(squeeze(P1.MoM.xpup(i,j,:))-squeeze(M1.xpup(i,j,:)))/norm(squeeze(M1.xpup(i,j,:)),Inf);
+e2_xpup     = abs(squeeze(P2.MoM.xpup(i,j,:))-squeeze(M2.xpup(i,j,:)))/norm(squeeze(M2.xpup(i,j,:)),Inf);
+e3_xpup     = abs(squeeze(P3.MoM.xpup(i,j,:))-squeeze(M3.xpup(i,j,:)))/norm(squeeze(M3.xpup(i,j,:)),Inf);
+e4_xpup     = abs(squeeze(P4.MoM.xpup(i,j,:))-squeeze(M4.xpup(i,j,:)))/norm(squeeze(M4.xpup(i,j,:)),Inf);
+e5_xpup     = abs(squeeze(P5.MoM.xpup(i,j,:))-squeeze(M5.xpup(i,j,:)))/norm(squeeze(M5.xpup(i,j,:)),Inf);
+e1_sigma_up = abs(squeeze(P1.MoM.upup(i,j,:).^0.5)-squeeze(M1.upup(i,j,:).^0.5))/norm(squeeze(M1.upup(i,j,:).^0.5),Inf);
+e2_sigma_up = abs(squeeze(P2.MoM.upup(i,j,:).^0.5)-squeeze(M2.upup(i,j,:).^0.5))/norm(squeeze(M2.upup(i,j,:).^0.5),Inf);
+e3_sigma_up = abs(squeeze(P3.MoM.upup(i,j,:).^0.5)-squeeze(M3.upup(i,j,:).^0.5))/norm(squeeze(M3.upup(i,j,:).^0.5),Inf);
+e4_sigma_up = abs(squeeze(P4.MoM.upup(i,j,:).^0.5)-squeeze(M4.upup(i,j,:).^0.5))/norm(squeeze(M4.upup(i,j,:).^0.5),Inf);
+e5_sigma_up = abs(squeeze(P5.MoM.upup(i,j,:).^0.5)-squeeze(M5.upup(i,j,:).^0.5))/norm(squeeze(M5.upup(i,j,:).^0.5),Inf);
+
 fig=figure('units','inches','outerposition',[1 1 12+1 6+1],'color','w');
 iFig = fig.Number;
 subplot(411)
-plot(P1.t/1,abs(squeeze(M1.xpxp(i,j,:).^0.5)-squeeze(P1.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M1.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color1); hold on
-plot(P2.t/2,abs(squeeze(M2.xpxp(i,j,:).^0.5)-squeeze(P2.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M2.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color2); hold on
-plot(P3.t/3,abs(squeeze(M3.xpxp(i,j,:).^0.5)-squeeze(P3.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M3.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color3); hold on
-plot(P4.t/4,abs(squeeze(M4.xpxp(i,j,:).^0.5)-squeeze(P4.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M4.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color4); hold on
-plot(P5.t/5,abs(squeeze(M5.xpxp(i,j,:).^0.5)-squeeze(P5.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M5.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color5); hold on
+plot(P1.t/1,e1_mean_xp,'-','linewidth',lw,'color',color1); hold on
+plot(P2.t/2,e2_mean_xp,'-','linewidth',lw,'color',color2); hold on
+plot(P3.t/3,e3_mean_xp,'-','linewidth',lw,'color',color3); hold on
+plot(P4.t/4,e4_mean_xp,'-','linewidth',lw,'color',color4); hold on
+plot(P5.t/5,e5_mean_xp,'-','linewidth',lw,'color',color5); hold on
 leg = legend('$St=1$','$St=2$','$St=3$','$St=4$','$St=5$', ...
     'interpreter','latex','fontsize',0.7*fs,'location','northwest');
 leg.Box = 'off';
@@ -198,13 +223,13 @@ ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
 ax.XAxis.TickLabels = [];
-ylim([0 0.06])
+ylim([0 0.002])
 subplot(412)
-plot(P1.t/1,abs(squeeze(M1.mean_up(i,j,:).^0.5)-squeeze(P1.MoM.mean_up(i,j,:).^0.5))./max(abs(squeeze(M1.mean_up(i,j,:).^0.5))),'-','linewidth',lw,'color',color1); hold on
-plot(P2.t/2,abs(squeeze(M2.mean_up(i,j,:).^0.5)-squeeze(P2.MoM.mean_up(i,j,:).^0.5))./max(abs(squeeze(M2.mean_up(i,j,:).^0.5))),'-','linewidth',lw,'color',color2); hold on
-plot(P3.t/3,abs(squeeze(M3.mean_up(i,j,:).^0.5)-squeeze(P3.MoM.mean_up(i,j,:).^0.5))./max(abs(squeeze(M3.mean_up(i,j,:).^0.5))),'-','linewidth',lw,'color',color3); hold on
-plot(P4.t/4,abs(squeeze(M4.mean_up(i,j,:).^0.5)-squeeze(P4.MoM.mean_up(i,j,:).^0.5))./max(abs(squeeze(M4.mean_up(i,j,:).^0.5))),'-','linewidth',lw,'color',color4); hold on
-plot(P5.t/5,abs(squeeze(M5.mean_up(i,j,:).^0.5)-squeeze(P5.MoM.mean_up(i,j,:).^0.5))./max(abs(squeeze(M5.mean_up(i,j,:).^0.5))),'-','linewidth',lw,'color',color5); hold on
+plot(P1.t/1,e1_mean_up,'-','linewidth',lw,'color',color1); hold on
+plot(P2.t/2,e2_mean_up,'-','linewidth',lw,'color',color2); hold on
+plot(P3.t/3,e3_mean_up,'-','linewidth',lw,'color',color3); hold on
+plot(P4.t/4,e4_mean_up,'-','linewidth',lw,'color',color4); hold on
+plot(P5.t/5,e5_mean_up,'-','linewidth',lw,'color',color5); hold on
 ylabel('$\varepsilon(\overline{V}_1)$','interpreter','latex','fontsize',fs)
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
@@ -212,11 +237,11 @@ ax.FontSize=0.8*fs;
 ax.XAxis.TickLabels = [];
 ylim([0 0.02])
 subplot(413)
-plot(P1.t/1,abs(squeeze(M1.xpxp(i,j,:).^0.5)-squeeze(P1.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M1.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color1); hold on
-plot(P2.t/2,abs(squeeze(M2.xpxp(i,j,:).^0.5)-squeeze(P2.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M2.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color2); hold on
-plot(P3.t/3,abs(squeeze(M3.xpxp(i,j,:).^0.5)-squeeze(P3.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M3.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color3); hold on
-plot(P4.t/4,abs(squeeze(M4.xpxp(i,j,:).^0.5)-squeeze(P4.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M4.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color4); hold on
-plot(P5.t/5,abs(squeeze(M5.xpxp(i,j,:).^0.5)-squeeze(P5.MoM.xpxp(i,j,:).^0.5))./max(abs(squeeze(M5.xpxp(i,j,:).^0.5))),'-','linewidth',lw,'color',color5); hold on
+plot(P1.t/1,e1_sigma_xp,'-','linewidth',lw,'color',color1); hold on
+plot(P2.t/2,e2_sigma_xp,'-','linewidth',lw,'color',color2); hold on
+plot(P3.t/3,e3_sigma_xp,'-','linewidth',lw,'color',color3); hold on
+plot(P4.t/4,e4_sigma_xp,'-','linewidth',lw,'color',color4); hold on
+plot(P5.t/5,e5_sigma_xp,'-','linewidth',lw,'color',color5); hold on
 ylabel('$\varepsilon(\sigma_{Y_1})$','interpreter','latex','fontsize',fs)
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
@@ -224,11 +249,11 @@ ax.FontSize=0.8*fs;
 ax.XAxis.TickLabels = [];
 ylim([0 0.06])
 subplot(414)
-plot(P1.t/1,abs(squeeze(M1.upup(i,j,:).^0.5)-squeeze(P1.MoM.upup(i,j,:).^0.5))./max(abs(squeeze(M1.upup(i,j,:).^0.5))),'-','linewidth',lw,'color',color1); hold on
-plot(P2.t/2,abs(squeeze(M2.upup(i,j,:).^0.5)-squeeze(P2.MoM.upup(i,j,:).^0.5))./max(abs(squeeze(M2.upup(i,j,:).^0.5))),'-','linewidth',lw,'color',color2); hold on
-plot(P3.t/3,abs(squeeze(M3.upup(i,j,:).^0.5)-squeeze(P3.MoM.upup(i,j,:).^0.5))./max(abs(squeeze(M3.upup(i,j,:).^0.5))),'-','linewidth',lw,'color',color3); hold on
-plot(P4.t/4,abs(squeeze(M4.upup(i,j,:).^0.5)-squeeze(P4.MoM.upup(i,j,:).^0.5))./max(abs(squeeze(M4.upup(i,j,:).^0.5))),'-','linewidth',lw,'color',color4); hold on
-plot(P5.t/5,abs(squeeze(M5.upup(i,j,:).^0.5)-squeeze(P5.MoM.upup(i,j,:).^0.5))./max(abs(squeeze(M5.upup(i,j,:).^0.5))),'-','linewidth',lw,'color',color5); hold on
+plot(P1.t/1,e1_sigma_up,'-','linewidth',lw,'color',color1); hold on
+plot(P2.t/2,e2_sigma_up,'-','linewidth',lw,'color',color2); hold on
+plot(P3.t/3,e3_sigma_up,'-','linewidth',lw,'color',color3); hold on
+plot(P4.t/4,e4_sigma_up,'-','linewidth',lw,'color',color4); hold on
+plot(P5.t/5,e5_sigma_up,'-','linewidth',lw,'color',color5); hold on
 ylabel('$\varepsilon(\sigma_{V_1})$','interpreter','latex','fontsize',fs)
 xlabel('$t/St$','interpreter','latex','fontsize',fs)
 ax = gca;
@@ -238,7 +263,7 @@ ylim([0 1])
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_errors';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;

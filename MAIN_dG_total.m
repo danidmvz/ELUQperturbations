@@ -129,8 +129,8 @@ title('$\hat{y}_{t_0}^t$','interpreter','latex','fontsize',fs)
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_lambda_y_St1';
-    %     savefig(iFig,thisName)
-    %     print(iFig,thisName,'-depsc','-painters')
+    savefig(iFig,thisName)
+    print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
 end
@@ -158,8 +158,8 @@ title('$\hat{y}_{t_0}^t$','interpreter','latex','fontsize',fs)
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_lambda_y_St5';
-    %     savefig(iFig,thisName)
-    %     print(iFig,thisName,'-depsc','-painters')
+    savefig(iFig,thisName)
+    print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
 end
@@ -189,8 +189,8 @@ title('$\hat{v}_{t_0}^t$','interpreter','latex','fontsize',fs)
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_lambda_v_St1';
-    %     savefig(iFig,thisName)
-    %     print(iFig,thisName,'-depsc','-painters')
+    savefig(iFig,thisName)
+    print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
 end
@@ -220,8 +220,8 @@ title('$\hat{v}_{t_0}^t$','interpreter','latex','fontsize',fs)
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_lambda_v_St5';
-    %     savefig(iFig,thisName)
-    %     print(iFig,thisName,'-depsc','-painters')
+    savefig(iFig,thisName)
+    print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
 end
@@ -309,8 +309,8 @@ xlim([1.3 2.3])
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_ellipses';
-    %     savefig(iFig,thisName)
-    %     print(iFig,thisName,'-depsc','-painters')
+    savefig(iFig,thisName)
+    print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
 end
@@ -362,7 +362,7 @@ ax.YTick = 0:0.01:0.2;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_cm2_xx';
-    %     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -407,7 +407,7 @@ ax.XTick = 0:1:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'dG_cm2_uu';
-    %     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -470,7 +470,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_orders_St1';
-    %     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;

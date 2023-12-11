@@ -277,7 +277,7 @@ ax.YAxis(1).TickValues = -20:2:20;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_orders_St1';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -325,7 +325,7 @@ ax.YAxis(1).TickValues = -20:2:20;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_orders_St5';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -377,7 +377,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_bound_St1';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -428,7 +428,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_bound_St5';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -473,7 +473,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_cm2_St1';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -518,7 +518,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'sine_cm2_St5';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;

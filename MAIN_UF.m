@@ -117,7 +117,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_orders_St1';
-    %     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -169,7 +169,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_bound_St1';
-    %     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -214,7 +214,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_cm2_St1';
-    %     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -268,7 +268,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_orders_St5';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -320,7 +320,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_bound_St5';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
@@ -364,7 +364,7 @@ ax.XTick = 0:2:10;
 if saveFigs == 1
     cd([figuresDir '_' label]);
     thisName = 'UF_cm2_St5';
-%     savefig(iFig,thisName)
+    savefig(iFig,thisName)
     print(iFig,thisName,'-depsc','-painters')
     print(iFig,thisName,'-dpng','-r800','-painters')
     cd ..;
