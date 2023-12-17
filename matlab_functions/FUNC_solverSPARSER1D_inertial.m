@@ -127,8 +127,8 @@ for k=1:nt(1)
     S1.xpxp(k,1)    = sum(w*sxpxp) + sum(w*(smxp - S1.mean_xp(k)).^2);
     S1.xpup(k,1)    = sum(w*sxpup) + sum(w*(smxp - S1.mean_xp(k)).*(smup - S1.mean_up(k)));
     S1.upup(k,1)    = sum(w*supup) + sum(w*(smup - S1.mean_up(k)).^2);
-    S1.axp(k,1)     = sum(w*saxp) + sum(w*(mean_a_s - mean_a).*(smxp - S1.mean_xp(k)));
-    S1.aup(k,1)     = sum(w*saup) + sum(w*(mean_a_s - mean_a).*(smup - S1.mean_up(k)));
+    S1.axp(k,1)     = sum(w*saxp)  + sum(w*(mean_a_s - mean_a).*(smxp - S1.mean_xp(k)));
+    S1.aup(k,1)     = sum(w*saup)  + sum(w*(mean_a_s - mean_a).*(smup - S1.mean_up(k)));
 end
 
 % % Post --------------------------------------------------------------------

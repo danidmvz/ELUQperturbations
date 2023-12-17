@@ -58,6 +58,7 @@ xp0(1,1) = xp00;
 yp0(1,1) = yp00;
 up0(1,1) = up00;
 vp0(1,1) = vp00;
+dataf1.mean_a1  = mean_a1;
 dataf1.a1       = a1;
 dataf1.a1a1     = sigma_a1^2;
 dataf1.a1a1a1   = cm3_a1;
