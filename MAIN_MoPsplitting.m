@@ -33,6 +33,7 @@ yp00     = 0;
 up00     = 0;
 vp00     = 0;
 
+
 %% MC-PSIC ================================================================
 
 % -------------------------------------------------------------------------
@@ -63,7 +64,7 @@ dataf1.mean_a1  = mean_a1;
 dataf1.a1       = a1;
 dataf1.a1a1     = a1a1;
 dataf1.a1a1a1   = cm3_a1;
-dataf1.a1a1a1a1 = cm4_a1;
+dataf1.a1a1a1a1 = cm4_a1*0;
 P1 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
@@ -103,7 +104,7 @@ dataf1.mean_a1  = mean_a_s(1);
 dataf1.a1       = a1;
 dataf1.a1a1     = a1a1_s(1);
 dataf1.a1a1a1   = cm3_a1;
-dataf1.a1a1a1a1 = cm4_a1;
+dataf1.a1a1a1a1 = cm4_a1*0;
 P21 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
@@ -111,7 +112,7 @@ dataf1.mean_a1  = mean_a_s(2);
 dataf1.a1       = a1;
 dataf1.a1a1     = a1a1_s(2);
 dataf1.a1a1a1   = cm3_a1;
-dataf1.a1a1a1a1 = cm4_a1;
+dataf1.a1a1a1a1 = cm4_a1*0;
 P22 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
@@ -162,7 +163,7 @@ dataf1.mean_a1  = mean_a_s(1);
 dataf1.a1       = a1;
 dataf1.a1a1     = a1a1_s(1);
 dataf1.a1a1a1   = cm3_a1;
-dataf1.a1a1a1a1 = cm4_a1;
+dataf1.a1a1a1a1 = cm4_a1*0;
 P31 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
@@ -170,7 +171,7 @@ dataf1.mean_a1  = mean_a_s(2);
 dataf1.a1       = a1;
 dataf1.a1a1     = a1a1_s(2);
 dataf1.a1a1a1   = cm3_a1;
-dataf1.a1a1a1a1 = cm4_a1;
+dataf1.a1a1a1a1 = cm4_a1*0;
 P32 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
@@ -178,7 +179,7 @@ dataf1.mean_a1  = mean_a_s(3);
 dataf1.a1       = a1;
 dataf1.a1a1     = a1a1_s(3);
 dataf1.a1a1a1   = cm3_a1;
-dataf1.a1a1a1a1 = cm4_a1;
+dataf1.a1a1a1a1 = cm4_a1*0;
 P33 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
 
@@ -223,8 +224,23 @@ plot(PP2.upup,'-.'); hold on
 plot(PP3.upup,':'); hold on
 
 
+e1 = norm(squeeze(P1.MoM.upup.^0.5)-squeeze(M1.upup.^0.5),2)/norm(squeeze(M1.upup.^0.5),Inf);
+e2 = norm(squeeze(PP2.upup.^0.5)-squeeze(M1.upup.^0.5),2)/norm(squeeze(M1.upup.^0.5),Inf);
+e3 = norm(squeeze(PP3.upup.^0.5)-squeeze(M1.upup.^0.5),2)/norm(squeeze(M1.upup.^0.5),Inf);
+
+E1 = norm(squeeze(P1.MoM.upup.^0.5)-PP3.upup.^0.5,2)/norm(PP3.upup.^0.5,Inf);
+E2 = norm(squeeze(PP2.upup.^0.5)   -PP3.upup.^0.5,2)/norm(PP3.upup.^0.5,Inf);
 
 
+x = linspace(1,3,100);
+y = 0.8*x.^(-2);
+close all
+subplot(121)
+loglog([1 2 3],[e1 e2 e3],'o--'); hold on
+loglog(x,y,'--k')
+subplot(122)
+loglog([1 2],[E1 E2],'o--'); hold on
+loglog(x,y,'--k')
 
 
 
