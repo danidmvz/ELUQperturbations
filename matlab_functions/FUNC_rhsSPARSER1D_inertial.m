@@ -16,7 +16,6 @@ aup     = y( 6*nmp+1: 7*nmp);
 out1  = FUNC_flow(time,mean_xp,mean_xp*0,mean_xp*0,flowType,dataFlow);
 u     = out1.u;
 dudx  = out1.dudx;
-dudy  = out1.dudy;
 d2udx = out1.d2udx;
 
 % Closure -----------------------------------------------------------------

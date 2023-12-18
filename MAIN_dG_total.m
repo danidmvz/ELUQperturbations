@@ -17,7 +17,7 @@ f1Type     = 3; % Stokes random
 dataf1     = [];
 npx        = 201; % Numer of clouds along x
 npy        = round(npx/2); % Numer of clouds along y
-nt         = [251 2];
+nt         = [251 10];
 tLim       = [0 6];
 
 % Forcing and initial condition
@@ -77,6 +77,7 @@ for i=1:npx
         vp0(i,j) = vp00(i,j);
     end
 end
+dataf1.mean_a1  = mean_a1;
 dataf1.a1       = a1;
 dataf1.a1a1     = sigma_a1^2;
 dataf1.a1a1a1   = cm3_a1;
@@ -88,6 +89,40 @@ P1 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
 taup = 5;
 P5 = FUNC_solverMoP2D_inertial(xp0,yp0,up0,vp0,tLim,nt, ...
     flowType,dataFlow,f1Type,dataf1,timeMethod,taup);
+
+%% SPARSER ================================================================
+
+% -------------------------------------------------------------------------
+taup     = 1;
+mean_xp0 = xp00;
+mean_yp0 = yp00;
+mean_up0 = up00;
+mean_vp0 = vp00;
+mean_a   = mean_a1;
+aa       = sigma_a1^2;
+S11 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,1,taup);
+S12 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,2,taup);
+S13 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,3,taup);
+S14 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,4,taup);
+S15 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
+
+% -------------------------------------------------------------------------
+taup = 5;
+S51 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,1,taup);
+S52 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,2,taup);
+S53 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,3,taup);
+S54 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,4,taup);
+S55 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
 
 
 %% PLOTS: CONTOURS ========================================================
@@ -327,16 +362,18 @@ close all
 
 figure(iFig) % close all
 p1(1) = plot(M1.t,squeeze(M1.xpxp(i,j,:).^0.5),'s-','linewidth',lw,'color',color14,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color14); hold on
-% p1(2) = plot(P1.t,squeeze(P1.xpxp(i,j,:).^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
-p1(2) = plot(P1.t,squeeze(P1.MoM.xpxp(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(2) = plot(P1.t,squeeze(P1.xpxp(i,j,:).^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
+p1(3) = plot(P1.t,squeeze(P1.MoM.xpxp(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(4) = plot(S11.t,squeeze(S11.xpxp(i,j,:).^0.5),'hexagram:','linewidth',lw,'color',color9,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
 ylim([0 0.04])
 yyaxis right
-p1(3) = plot(M1.t,squeeze(M1.ypyp(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
-% p1(5) = plot(P1.t,squeeze(P1.ypyp(i,j,:).^0.5),'^--','linewidth',lw,'color',color3,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
-p1(4) = plot(P1.t,squeeze(P1.MoM.ypyp(i,j,:).^0.5),'*-.','linewidth',lw,'color',color9,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
+p1(5) = plot(M1.t,squeeze(M1.ypyp(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
+p1(6) = plot(P1.t,squeeze(P1.ypyp(i,j,:).^0.5),'^--','linewidth',lw,'color',color1,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color1); hold on
+p1(7) = plot(P1.t,squeeze(P1.MoM.ypyp(i,j,:).^0.5),'*-.','linewidth',lw,'color',color2,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color2); hold on
+p1(8) = plot(S11.t,squeeze(S11.ypyp(i,j,:).^0.5),'pentagram:','linewidth',lw,'color',color3,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
 ylim([0 0.14])
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
@@ -349,11 +386,13 @@ ylabel('$\sigma_{Y_1}$','interpreter','latex','fontsize',fs)
 ax.YAxis(1).Color = 'k';
 ax.YAxis(2).Color = 'k';
 leg1{1} = '$\sigma_{Y_1}$, MC-PSIC';
-% leg1{2} = '$\sigma_{Y_1}$, MC-MoP';
-leg1{2} = '$\sigma_{Y_1}$, MoM-MoP';
-leg1{3} = '$\sigma_{Y_2}$, MC-PSIC';
-% leg1{5} = '$\sigma_{Y_2}$, MC-MoP';
-leg1{4} = '$\sigma_{Y_2}$, MoM-MoP';
+leg1{2} = '$\sigma_{Y_1}$, MC-MoP';
+leg1{3} = '$\sigma_{Y_1}$, MoM-MoP';
+leg1{4} = '$\sigma_{Y_1}$, SPARSE-R';
+leg1{5} = '$\sigma_{Y_2}$, MC-PSIC';
+leg1{6} = '$\sigma_{Y_2}$, MC-MoP';
+leg1{7} = '$\sigma_{Y_2}$, MoM-MoP';
+leg1{8} = '$\sigma_{Y_2}$, SPARSE-R';
 leg = legend(p1,leg1,'interpreter','latex','fontsize',0.68*fs,'location','north');
 leg.Box = 'off';
 leg.NumColumns = 2;
@@ -372,17 +411,19 @@ iFig = iFig+1; clear p1 leg1 leg
 
 figure(iFig) % close all
 p1(1) = plot(M1.t,squeeze(M1.upup(i,j,:).^0.5),'s-','linewidth',lw,'color',color14,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color14); hold on
-% p1(2) = plot(P1.t,squeeze(P1.upup(i,j,:).^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
-p1(2) = plot(P1.t,squeeze(P1.MoM.upup(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(2) = plot(P1.t,squeeze(P1.upup(i,j,:).^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
+p1(3) = plot(P1.t,squeeze(P1.MoM.upup(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(4) = plot(S11.t,squeeze(S11.upup(i,j,:).^0.5),'hexagram:','linewidth',lw,'color',color9,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
-ylim([0 0.03])
+ylim([0 0.04])
 yyaxis right
-p1(3) = plot(M1.t,squeeze(M1.vpvp(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
-% p1(5) = plot(P1.t,squeeze(P1.vpvp(i,j,:).^0.5),'^--','linewidth',lw,'color',color3,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
-p1(4) = plot(P1.t,squeeze(P1.MoM.vpvp(i,j,:).^0.5),'*-.','linewidth',lw,'color',color9,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
-ylim([0 0.06])
+p1(5) = plot(M1.t,squeeze(M1.vpvp(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
+p1(6) = plot(P1.t,squeeze(P1.vpvp(i,j,:).^0.5),'^--','linewidth',lw,'color',color1,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color1); hold on
+p1(7) = plot(P1.t,squeeze(P1.MoM.vpvp(i,j,:).^0.5),'*-.','linewidth',lw,'color',color2,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color2); hold on
+p1(8) = plot(S11.t,squeeze(S11.vpvp(i,j,:).^0.5),'pentagram:','linewidth',lw,'color',color3,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
+ylim([0 0.08])
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
@@ -394,11 +435,13 @@ ylabel('$\sigma_{V_1}$','interpreter','latex','fontsize',fs)
 ax.YAxis(1).Color = 'k';
 ax.YAxis(2).Color = 'k';
 leg1{1} = '$\sigma_{V_1}$, MC-PSIC';
-% leg1{2} = '$\sigma_{V_1}$, MC-MoP';
-leg1{2} = '$\sigma_{V_1}$, MoM-MoP';
-leg1{3} = '$\sigma_{V_2}$, MC-PSIC';
-% leg1{5} = '$\sigma_{V_2}$, MC-MoP';
-leg1{4} = '$\sigma_{V_2}$, MoM-MoP';
+leg1{2} = '$\sigma_{V_1}$, MC-MoP';
+leg1{3} = '$\sigma_{V_1}$, MoM-MoP';
+leg1{4} = '$\sigma_{V_1}$, SPARSE-R';
+leg1{5} = '$\sigma_{V_2}$, MC-PSIC';
+leg1{6} = '$\sigma_{V_2}$, MC-MoP';
+leg1{7} = '$\sigma_{V_2}$, MoM-MoP';
+leg1{8} = '$\sigma_{V_2}$, SPARSE-R';
 leg = legend(p1,leg1,'interpreter','latex','fontsize',0.68*fs,'location','north');
 leg.Box = 'off';
 leg.NumColumns = 2;

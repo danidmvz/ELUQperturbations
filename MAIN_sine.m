@@ -431,33 +431,37 @@ iFig = iFig+1; clear p1 leg1 leg
 % -------------------------------------------------------------------------
 figure(iFig) % close all
 p1(1) = plot(M1.t,squeeze(M1.xpxp(i,j,:).^0.5),'s-','linewidth',lw,'color',color14,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color14); hold on
-p1(3) = plot(S11.t,squeeze(S11.xpxp.^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
-p1(2) = plot(P1.t,squeeze(P1.MoM.xpxp(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(2) = plot(P1.t,squeeze(P1.xpxp(i,j,:).^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
+p1(3) = plot(P1.t,squeeze(P1.MoM.xpxp(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(4) = plot(S11.t,squeeze(S11.xpxp.^0.5),'hexagram:','linewidth',lw,'color',color9,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
-ylim([0 0.3])
+ylim([0 0.5])
 yyaxis right
-p1(4) = plot(M1.t,squeeze(M1.upup(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
-p1(6) = plot(S11.t,squeeze(S11.upup.^0.5),'^--','linewidth',lw,'color',color3,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
-p1(5) = plot(P1.t,squeeze(P1.MoM.upup(i,j,:).^0.5),'*-.','linewidth',lw,'color',color9,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
+p1(5) = plot(M1.t,squeeze(M1.upup(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
+p1(6) = plot(P1.t,squeeze(P1.upup(i,j,:).^0.5),'^--','linewidth',lw,'color',color1,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color1); hold on
+p1(7) = plot(P1.t,squeeze(P1.MoM.upup(i,j,:).^0.5),'*-.','linewidth',lw,'color',color2,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color2); hold on
+p1(8) = plot(S11.t,squeeze(S11.upup.^0.5),'pentagram:','linewidth',lw,'color',color3,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
 ylim([0 0.1])
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
-ylabel('$\sigma_{Y_1}$','interpreter','latex','fontsize',fs)
+ylabel('$\sigma_{V_1}$','interpreter','latex','fontsize',fs)
 xlabel('$t$','interpreter','latex','fontsize',fs)
 yyaxis left
-ylabel('$\sigma_{V_1}$','interpreter','latex','fontsize',fs)
+ylabel('$\sigma_{Y_1}$','interpreter','latex','fontsize',fs)
 ax.YAxis(1).Color = 'k';
 ax.YAxis(2).Color = 'k';
 leg1{1} = '$\sigma_{Y_1}$, MC-PSIC';
-leg1{2} = '$\sigma_{Y_1}$, MoM-MoP';
-leg1{3} = '$\sigma_{Y_1}$, SPARSE-R';
-leg1{4} = '$\sigma_{V_1}$, MC-PSIC';
-leg1{5} = '$\sigma_{V_1}$, MoM-MoP';
-leg1{6} = '$\sigma_{V_1}$, SPARSE-R';
-leg = legend(p1,leg1,'interpreter','latex','fontsize',0.7*fs,'location','northeast');
+leg1{2} = '$\sigma_{Y_1}$, MC-MoP';
+leg1{3} = '$\sigma_{Y_1}$, MoM-MoP';
+leg1{4} = '$\sigma_{Y_1}$, SPARSE-R';
+leg1{5} = '$\sigma_{V_1}$, MC-PSIC';
+leg1{6} = '$\sigma_{V_1}$, MC-MoP';
+leg1{7} = '$\sigma_{V_1}$, MoM-MoP';
+leg1{8} = '$\sigma_{V_1}$, SPARSE-R';
+leg = legend(p1,leg1,'interpreter','latex','fontsize',0.68*fs,'location','northeast');
 leg.Box = 'off';
 leg.NumColumns = 2;
 ax.XTick = 0:2:10;
@@ -476,35 +480,39 @@ iFig = iFig+1; clear p1 leg1 leg
 % -------------------------------------------------------------------------
 figure(iFig) % close all
 p1(1) = plot(M5.t,squeeze(M5.xpxp(i,j,:).^0.5),'s-','linewidth',lw,'color',color14,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color14); hold on
-p1(3) = plot(S51.t,squeeze(S51.xpxp.^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
-p1(2) = plot(P5.t,squeeze(P5.MoM.xpxp(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(2) = plot(P5.t,squeeze(P5.xpxp(i,j,:).^0.5),'>--','linewidth',lw,'color',color8,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color8); hold on
+p1(3) = plot(P5.t,squeeze(P5.MoM.xpxp(i,j,:).^0.5),'o-.','linewidth',lw,'color',color10,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color10); hold on
+p1(4) = plot(S51.t,squeeze(S51.xpxp.^0.5),'hexagram:','linewidth',lw,'color',color9,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
-ylim([0 0.3])
+ylim([0 0.5])
 yyaxis right
-p1(4) = plot(M5.t,squeeze(M5.upup(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
-p1(6) = plot(S51.t,squeeze(S51.upup.^0.5),'^--','linewidth',lw,'color',color3,'MarkerIndices',round(0.4*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
-p1(5) = plot(P5.t,squeeze(P5.MoM.upup(i,j,:).^0.5),'*-.','linewidth',lw,'color',color9,'MarkerIndices',round(0.7*nn):nn:nt(1),'MarkerFaceColor',color9); hold on
+p1(5) = plot(M5.t,squeeze(M5.upup(i,j,:).^0.5),'d-','linewidth',lw,'color',color15,'MarkerIndices',round(0.1*nn):nn:nt(1),'MarkerFaceColor',color15); hold on
+p1(6) = plot(P5.t,squeeze(P5.upup(i,j,:).^0.5),'^--','linewidth',lw,'color',color1,'MarkerIndices',round(0.3*nn):nn:nt(1),'MarkerFaceColor',color1); hold on
+p1(7) = plot(P5.t,squeeze(P5.MoM.upup(i,j,:).^0.5),'*-.','linewidth',lw,'color',color2,'MarkerIndices',round(0.6*nn):nn:nt(1),'MarkerFaceColor',color2); hold on
+p1(8) = plot(S51.t,squeeze(S51.upup.^0.5),'pentagram:','linewidth',lw,'color',color3,'MarkerIndices',round(0.8*nn):nn:nt(1),'MarkerFaceColor',color3); hold on
 ylim([0 0.1])
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
-ylabel('$\sigma_{Y_1}$','interpreter','latex','fontsize',fs)
+ylabel('$\sigma_{V_1}$','interpreter','latex','fontsize',fs)
 xlabel('$t$','interpreter','latex','fontsize',fs)
 yyaxis left
-ylabel('$\sigma_{V_1}$','interpreter','latex','fontsize',fs)
+ylabel('$\sigma_{Y_1}$','interpreter','latex','fontsize',fs)
 ax.YAxis(1).Color = 'k';
 ax.YAxis(2).Color = 'k';
 leg1{1} = '$\sigma_{Y_1}$, MC-PSIC';
-leg1{2} = '$\sigma_{Y_1}$, MoM-MoP';
-leg1{3} = '$\sigma_{Y_1}$, SPARSE-R';
-leg1{4} = '$\sigma_{V_1}$, MC-PSIC';
-leg1{5} = '$\sigma_{V_1}$, MoM-MoP';
-leg1{6} = '$\sigma_{V_1}$, SPARSE-R';
-% leg = legend(p1,leg1,'interpreter','latex','fontsize',0.8*fs,'location','northeast');
-% leg.Box = 'off';
-% leg.NumColumns = 1;
+leg1{2} = '$\sigma_{Y_1}$, MC-MoP';
+leg1{3} = '$\sigma_{Y_1}$, MoM-MoP';
+leg1{4} = '$\sigma_{Y_1}$, SPARSE-R';
+leg1{5} = '$\sigma_{V_1}$, MC-PSIC';
+leg1{6} = '$\sigma_{V_1}$, MC-MoP';
+leg1{7} = '$\sigma_{V_1}$, MoM-MoP';
+leg1{8} = '$\sigma_{V_1}$, SPARSE-R';
+leg = legend(p1,leg1,'interpreter','latex','fontsize',0.68*fs,'location','northeast');
+leg.Box = 'off';
+leg.NumColumns = 2;
 ax.XTick = 0:2:10;
 % ax.YTick = 0:0.02:0.12;
 if saveFigs == 1
