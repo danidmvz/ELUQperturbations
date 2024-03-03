@@ -17,7 +17,7 @@ f1Type     = 3; % Stokes random
 dataf1     = [];
 npx        = 201; % Numer of clouds along x
 npy        = round(npx/2); % Numer of clouds along y
-nt         = [251 10];
+nt         = [251 2];
 tLim       = [0 6];
 
 % Forcing and initial condition
@@ -102,27 +102,27 @@ mean_a   = mean_a1;
 aa       = sigma_a1^2;
 S11 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,1,taup);
-S12 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,2,taup);
-S13 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,3,taup);
-S14 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,4,taup);
-S15 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
+% S12 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,2,taup);
+% S13 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,3,taup);
+% S14 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,4,taup);
+% S15 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
 
 % -------------------------------------------------------------------------
 taup = 5;
 S51 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,1,taup);
-S52 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,2,taup);
-S53 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,3,taup);
-S54 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,4,taup);
-S55 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
-    mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
+% S52 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,2,taup);
+% S53 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,3,taup);
+% S54 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,4,taup);
+% S55 = FUNC_solverSPARSER2D_inertial(mean_xp0,mean_yp0,mean_up0,mean_vp0, ...
+%     mean_a,aa,tLim,nt,flowType,dataFlow,timeMethod,5,taup);
 
 
 %% PLOTS: CONTOURS ========================================================
@@ -337,8 +337,8 @@ text(2.08+0.03,1,'$St=0.5$','interpreter','latex','fontsize',fs)
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 ax.FontSize=0.8*fs;
-xlabel('$x$','interpreter','latex','fontsize',fs)
-ylabel('$y$','interpreter','latex','fontsize',fs)
+xlabel('$y_1$','interpreter','latex','fontsize',fs)
+ylabel('$y_2$','interpreter','latex','fontsize',fs)
 xlim([1.3 2.3])
 % ax.YAxis.TickValues = 0:0.1:0.7;
 if saveFigs == 1
