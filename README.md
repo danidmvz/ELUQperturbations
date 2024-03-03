@@ -1,7 +1,4 @@
-# On the propagation of uncertainty in Eulerian-Lagrangian point-particle
-methods with non-deterministic forcing laws
-
-Uncertainty Quantification framework for Eulerian-Lagrangian systems with stochastic forcing using the method of perturbations and method of moments
+# On the propagation of uncertainty in Eulerian-Lagrangian point-particle methods with non-deterministic forcing laws
 
 An analysis of the propagation of uncertainty in the particle phase solution of particle-laden flows described with the
 point-particle approach is presented by combining a regular perturbation problem with the method of moments. Non-
